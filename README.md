@@ -27,3 +27,33 @@ Is there something further I need to do to tell Godot that the value of an expor
 Changing some of the `SpriteWrapper` logic based on a [gdscript.com explanation of getters and setters](https://gdscript.com/articles/godot-4-gdscript/#property-syntax) does not help:
 
 ![same outcome](https://i.ibb.co/F87BHWG/Screenshot-2023-06-28-161105.png)
+
+# Solution
+
+There were two mistakes being made:
+
+1. Don't use the `Sprite2D` texture property as the source-of-truth for the setting we're keeping track of. This node's texture, in the `SpriteWrapper` scene tree, is *intentionally* left blank; the idea is that it will be set on a case-by-case basis
+
+2. Do update the `Sprite2D` texture from the now-decoupled `SpriteWrapper` texture when the scene tree is ready
+
+Our code changes from this:
+
+```
+@export var texture : CompressedTexture2D :
+	get: return ref_node.texture if ready() else null
+	set(val): if ready(): ref_node.texture = val
+```
+
+To this:
+
+```
+@export var texture : CompressedTexture2D :
+	get: return texture
+	set(val):
+		texture = val
+		if ready():
+			ref_node.texture = val
+
+func _ready():
+	ref_node.texture = texture
+```

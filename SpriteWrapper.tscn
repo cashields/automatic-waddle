@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bygjicynu4jxu"]
+
+[ext_resource type="Script" path="res://SpriteWrapper.gd" id="1_j33ug"]
+
+[node name="SpriteWrapper" type="Node"]
+script = ExtResource("1_j33ug")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

@@ -21,3 +21,9 @@ Checking the `SpriteWrapper`'s texture property on ready confirms that there's "
 ![SpriteWrapper texture is just Object#null](https://i.ibb.co/rsTJTFk/Untitled-2023-06-28-1551.png)
 
 Is there something further I need to do to tell Godot that the value of an exported variable needs to be saved with the overall scene tree?
+
+## Update 1
+
+Changing some of the `SpriteWrapper` logic based on a [gdscript.com explanation of getters and setters](https://gdscript.com/articles/godot-4-gdscript/#property-syntax) does not help:
+
+![same outcome](https://i.ibb.co/F87BHWG/Screenshot-2023-06-28-161105.png)
